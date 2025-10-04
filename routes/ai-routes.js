@@ -47,8 +47,15 @@ router.post("/chat", async (req, res) => {
 
     const aiReply = await generateWithRetry(prompt);
 
-    res.json(aiReply);
-    
+    // ✅ Clean up the AI text response
+    const cleanReply = aiReply
+      .replace(/\\n/g, " ")
+      .replace(/\n/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    res.json(cleanReply);
+
   } catch (error) {
     console.error("AI Error:", error);
     res.status(500).json({
@@ -59,5 +66,6 @@ router.post("/chat", async (req, res) => {
     });
   }
 });
+
 
 export default router;
