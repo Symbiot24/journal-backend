@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin : "http://localhost:8080",
+  origin : "https://mindecho30.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }
