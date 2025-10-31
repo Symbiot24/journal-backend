@@ -131,6 +131,9 @@ router.post('/login', async (req, res) => {
         email: user.email
         };
 
+      // Update last activity on login
+      await User.updateOne({ _id: user._id }, { $set: { lastActivityAt: new Date() } });
+
       const token = generateToken(payload);
   
       console.log(`User ${user.username} logged in successfully`);
